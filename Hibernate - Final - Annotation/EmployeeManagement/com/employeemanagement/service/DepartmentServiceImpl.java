@@ -21,7 +21,7 @@ import com.employeemanagement.service.DepartmentService;
  * @since  2024/07/30
  */
 public class DepartmentServiceImpl implements DepartmentService {
-    DepartmentDao departmentDao = new DepartmentDaoImpl();
+    private DepartmentDao departmentDao = new DepartmentDaoImpl();
     
     @Override
     public Department addDepartment(String departmentName) throws EmployeeException {

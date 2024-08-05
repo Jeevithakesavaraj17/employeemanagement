@@ -20,7 +20,10 @@ import com.employeemanagement.model.Project;
 public interface EmployeeService {
     
     /**
+     * <p>
      * Add employee details
+     * </p>
+     *
      * @param employeeId      Id of the employee
      * @param employeeName    Name of the employee
      * @param dateOfBirth     employee's date of birth
@@ -39,14 +42,20 @@ public interface EmployeeService {
                                  long accountNumber, String ifscCode) throws EmployeeException;
 
     /**
+     * <p>
      * Get list of employees
+     * </p>
+     *
      * @return List<Employee>    list of employees
      * @throws EmployeeException   If exception occurs, while getting the list of employees.
      */
     public List<Employee> getEmployees() throws EmployeeException;
 
     /**
+     * <p>
      * Get employee details by employeeId
+     * </p>
+     *
      * @param employeeId     Id of the employee
      * @return Employee      If employee present, return employee details
      *                      else return null.
@@ -55,14 +64,20 @@ public interface EmployeeService {
     public Employee getEmployeeById(int employeeId) throws EmployeeException;
 
     /**
+     * <p>
      * Checks if employee List is empty or not
+     * </p>
+     *
      * @return boolean             If empty, returns true or else false 
      * @throws EmployeeException   If exception occurs, while checking for the employee list is empty or not.
      */
     public boolean isEmployeeListEmpty() throws EmployeeException;
    
     /**
+     * <p>
      * Check if employee is present by employeeId
+     * </p>
+     *
      * @param employeeId     Id of the employee
      * @return Employee      If employee present, return employee details
      *                      else return null.
@@ -70,7 +85,11 @@ public interface EmployeeService {
      */
     public boolean isEmployeePresent(int employeeId) throws EmployeeException;
 
-    /** Add project to the employee
+    /** 
+     * <p>
+     * Add project to the employee
+     * </p>
+     *
      * @param employee   employee who we have to add project
      * @param project    project which is added to employee
      * @throws EmployeeException   If exception occurs, while adding project to the employee
@@ -78,7 +97,10 @@ public interface EmployeeService {
     public void addProjectToEmployee(Project project, Employee employee) throws EmployeeException;
 
     /**
+     * <p>
      * Update employee name by their employee id
+     * </p>
+     *
      * @param employeeId    Id of the employee
      * @param employeeName  Name of the employee
      * @return Employee     If employee detail is updated, return employee
@@ -87,7 +109,10 @@ public interface EmployeeService {
     public Employee updateEmployeeDetails(Employee employee) throws EmployeeException;
 
     /**
+     * <p>
      * Delete employee by their employeeId
+     * </p>
+     *
      * @param employeeId   Id of the employee
      * @return boolean     If employee deleted, returns true or else false
      * @throws EmployeeException  If exception occurs, while deleting the employee.

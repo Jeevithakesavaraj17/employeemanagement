@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import com.employeemanagement.exception.EmployeeException;
 import com.employeemanagement.model.Department;
 import com.employeemanagement.model.Employee;
@@ -15,21 +18,24 @@ import com.employeemanagement.service.EmployeeServiceImpl;
 import com.employeemanagement.util.Validator;
 
 /**
- *<p>
+ * <p>
  * This class is for display menu and have methods for get department details and
  * displaying the details of department and list of departments.
- *</p>
+ * </p>
  *
- *@author Jeevithakesavaraj
- *@version 1.0
- *@since  2024-07-20
+ * @author Jeevithakesavaraj
+ * @version 1.0
+ * @since  2024/07/30
  */
 public class DepartmentController {
     Scanner scanner = new Scanner(System.in);
-    DepartmentService departmentService = new DepartmentServiceImpl();
+    private static Logger logger = LogManager.getLogger();
+    private DepartmentService departmentService = new DepartmentServiceImpl();
 
     /**
+     * <p>
      * Display menu which has functions to get department details and display department details.
+     * </p>
      */
     public void displayMenu() {
         boolean isExit = false;
@@ -66,8 +72,10 @@ public class DepartmentController {
     }
 
     /**
-    * Get DepartmentId and Department name and add that department details
-    */
+     * <p>
+     * Get DepartmentId and Department name and add that department details
+     * </p>
+     */
     public void addDepartment() {
         scanner.nextLine();
         System.out.print("Enter Department Name : ");
@@ -75,15 +83,17 @@ public class DepartmentController {
         try {
             Department department = departmentService.addDepartment(departmentName); 
             System.out.println(department);
-            System.out.println("Department added successfully.");
+            logger.info(departmentName + " department added successfully.");
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /**
-    * Display list of departments
-    */
+     * <p>
+     * Display list of departments
+     * </p>
+     */
     public void displayDepartments() {
         try {
             List<Department> departments = departmentService.getDepartments();
@@ -93,13 +103,16 @@ public class DepartmentController {
                 System.out.format(format, department.getDepartmentId(), 
                                           department.getDepartmentName());
             }
+            logger.info("Departments displayed");
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /**
+     * <p>
      * Display list of employees for the particular department Id.
+     * </p>
      */
     public void displayEmployeesByDepartmentId() {
         System.out.println("Employees");
@@ -108,12 +121,12 @@ public class DepartmentController {
         int departmentId = scanner.nextInt();
         try {
             Department department = departmentService.getDepartment(departmentId);
-            if (department == null) {
-                System.out.println("No department Found.");
+            if (null == department) {
+                logger.warn("No department Found.");
             } else {
                 List<Employee> employees = new ArrayList<>(department.getEmployees()); 
                 if (employees.isEmpty()) {
-                    System.out.println("No employees Found");
+                    logger.warn("No employees Found");
                 } else {
                     String format = "| %-4s | %15s | %-4s | %-12s | %-12s | %-20s | %-10s | %-20s \n";
                     System.out.format(format, "Id", "Name", "Age", "DepartmentId",
@@ -130,23 +143,26 @@ public class DepartmentController {
                                                    employee.getProjectDetails());
                         }
                     }
+                    logger.info("Displayed list of employees in the department " + department.getDepartmentName());
                 }
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /** 
+     * <p>
      * Update department name by getting department Id and new name for the department
+     * </p>
      */
     public void updateDepartmentName() {
         System.out.print("Enter DepartmentId : ");
         int departmentId = scanner.nextInt();
         try {
             Department department = departmentService.getDepartment(departmentId);
-            if (department == null) {
-                System.out.println("No department found.");
+            if (null == department) {
+                logger.warn("No department found.");
             } else {
                 scanner.nextLine();
                 System.out.print("Enter new name for the department : ");
@@ -154,15 +170,17 @@ public class DepartmentController {
                 department.setDepartmentName(departmentName);
                 Department departmentObject = departmentService.updateDepartmentName(department);
                 System.out.println(departmentObject);
-                System.out.println("Department name updated successfully.");
+                logger.info("Department name updated successfully for " + departmentId);
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }  
 
     /**
+     * <p>
      * Delete the department by department Id
+     * </p>
      */
     public void deleteDepartment() {
         try {
@@ -170,20 +188,20 @@ public class DepartmentController {
             System.out.print("Enter department Id : ");
             int departmentId = scanner.nextInt();
             Department department = departmentService.getDepartment(departmentId);
-            if (department == null) {
-                System.out.println("No department Found.");
+            if (null == department) {
+                logger.warn("No department Found.");
             } else {
                 List<Employee> employees = new ArrayList<>(department.getEmployees());
                 if (employees.isEmpty()) {
                     if (departmentService.isDepartmentDeleted(department)) {
-                        System.out.println("Department deleted successfully.");
+                        logger.info(department.getDepartmentName() + " department deleted successfully.");
                     }
                 } else {
-                    System.out.println("Enable to delete the department because it has employees.");
+                    logger.warn("Enable to delete " + department.getDepartmentName() + " the department because it has employees.");
                 }
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

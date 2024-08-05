@@ -18,7 +18,10 @@ import java.util.regex.Pattern;
 public class Validator {
 
     /**
+     * <p>
      * This method is used to validate name from the user
+     * </p>
+     *
      * @param inputName     name which we have to validate 
      * @return boolean      If input name contains empty space or number or empty string returns false,
      *                     else return true.
@@ -39,7 +42,10 @@ public class Validator {
     } 
   
     /**
+     * <p>
      * This method is used to validate date.
+     * </p>
+     *
      * @param  inputDate   date which we have to validate
      * @return boolean     If input date is in YYYY/MM/DD format, return true
      *                    else return false.
@@ -54,7 +60,10 @@ public class Validator {
     }
 
     /**
+     * <p>
      * This method is used to validate phone from the user
+     * </p>
+     *
      * @param phoneNumber   phone number which we have to validate
      * @return  boolean     If given phone number has ten digit number, returns true
      *                     else return false. 
@@ -69,7 +78,10 @@ public class Validator {
     } 
 
     /**
+     * <p>
      * This method is used to validate mail Id.
+     * </p>
+     *
      * @param  mailId    mail id which we have to validate 
      * @return boolean    If mail Id has alphabets and number with @, returns true
      *                   else returns false.
@@ -86,7 +98,10 @@ public class Validator {
     }  
     
     /**
+     * <p>
      * This method is used to validate experience
+     * </p>
+     *
      * @param exerience   experience which we have to validate
      * @return boolean    If experience is betweeen 0 and 30, returns true
      *                   else false.

@@ -71,10 +71,7 @@ public class Project {
     public boolean getIsDeleted() {
         return isDeleted;
     }
-    /**
-     * Get employees in the particular project
-     *@return Set<Employee>     set of employees
-     */
+
     public Set<Employee> getEmployees() {
         return employees;
     }

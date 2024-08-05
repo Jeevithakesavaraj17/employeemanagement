@@ -5,16 +5,28 @@ import com.employeemanagement.controller.EmployeeController;
 import com.employeemanagement.controller.ProjectController;
 
 /**
- *<p>
- * This class contains main application for controlling employee, department and project service.
- *</p>
+ * <p>
+ * This class contains main application for controlling employee, department and project details
+ * </p>
  *
- *@author Jeevithakesavaraj
- *@version 1.0
- *@since 2024/07/30
+ * @author Jeevithakesavaraj
+ * @version 1.0
+ * @since 2024/07/30
  */ 
 public class EmployeeManagementSystem {
+
     public static void main(String[] args) {
+        EmployeeManagementSystem employeemanagement = new EmployeeManagementSystem();
+        employeemanagement.displayMenu();
+    }
+
+    /**
+     * <p>
+     * This method displays menu for the employee management system and consists of 
+     * employee, department and project controller
+     * </p>
+     */
+    public void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         DepartmentController departmentController = new DepartmentController();
         EmployeeController employeeController = new EmployeeController();
@@ -45,5 +57,4 @@ public class EmployeeManagementSystem {
             }
         }
     }
-
 }

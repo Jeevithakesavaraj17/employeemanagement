@@ -8,14 +8,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * <p>
  * This classs represents salary account details of the employee
- * id               Id of the account
+ * id               id for the account detail of the employee
  * accountNumber    employee's Account number
  * ifscCode         IFSC code of the account
  * </p>

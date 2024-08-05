@@ -17,7 +17,7 @@ import com.employeemanagement.service.SalaryAccountService;
  * @since     2024/07/30
  */
 public class SalaryAccountServiceImpl implements SalaryAccountService {
-    SalaryAccountDao salaryAccountDao = new SalaryAccountDaoImpl();
+    private SalaryAccountDao salaryAccountDao = new SalaryAccountDaoImpl();
 
     @Override
     public void addSalaryAccount(SalaryAccount salaryAccount) throws EmployeeException {

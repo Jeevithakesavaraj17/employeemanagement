@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import com.employeemanagement.exception.EmployeeException;
 import com.employeemanagement.model.Employee;
 import com.employeemanagement.model.Project;
@@ -13,21 +16,24 @@ import com.employeemanagement.service.ProjectServiceImpl;
 import com.employeemanagement.util.Validator;
 
 /**
- *<p>
+ * <p>
  * This class is used for displaying menu for project Management and
  * have some methods for getting project details, add and display employees.
- *</p>
+ * </p>
  *
- *@author Jeevithakesavaraj
- *@version 1.0
- *@since  2024-07-20
+ * @author Jeevithakesavaraj
+ * @version 1.0
+ * @since  2024/07/30
  */
 public class ProjectController {
     Scanner scanner = new Scanner(System.in);
-    ProjectService projectService = new ProjectServiceImpl();
+    private static Logger logger = LogManager.getLogger();
+    private ProjectService projectService = new ProjectServiceImpl();
 
     /**
+     * <p>
      * Display menu which has functions to get project details and display project details.
+     * </p>
      */
     public void displayMenu() {
         boolean isExit = false;
@@ -65,8 +71,10 @@ public class ProjectController {
     }
 
     /**
-    * Get ProjectId and Project name and add that project details
-    */
+     * <p>
+     * Get ProjectId and Project name and add that project details
+     * </p>
+     */
     public void addProject() {
         scanner.nextLine();
         System.out.print("Enter Project Name : ");
@@ -74,15 +82,17 @@ public class ProjectController {
         try {
             Project project = projectService.addProject(projectName);
             System.out.println(project);
-            System.out.println("Project added successfully");
+            logger.info("Project added successfully : " + projectName);
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /**
-    * Display list of projects
-    */
+     * <p>
+     * Display list of projects
+     * </p>
+     */
     public void displayProjects() {
         try {
             System.out.println("List of Projects");
@@ -93,13 +103,16 @@ public class ProjectController {
                 System.out.format(format, project.getProjectId(), 
                                   project.getProjectName());
             }
+            logger.info("Displayed list of departments.");
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /**
+     * <p>
      * Get project id and display employees by that project id.
+     * </p>
      */
     public void displayEmployeesByProjectId() {
         System.out.println("Display employees by Project Id");
@@ -120,21 +133,24 @@ public class ProjectController {
                                       employee.getMailId(),
                                       employee.getExperience());
             }
+            logger.info("Displayed List of employees in the project " + projectId);
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /** 
+     * <p>
      * Update project name by getting project Id and new name for the project
+     * </p>
      */
     public void updateProjectName() {
         System.out.print("Enter Project Id : ");
         int projectId = scanner.nextInt();
         try {
             Project project = projectService.getProject(projectId);
-            if (project== null) {
-                System.out.println("No project found.");
+            if (null == project) {
+                logger.warn("No project found.");
             } else {
                 scanner.nextLine();
                 System.out.print("Enter new name for the project : ");
@@ -142,15 +158,17 @@ public class ProjectController {
                 project.setProjectName(projectName);
                 Project projectObject = projectService.updateProjectName(project);
                 System.out.println(projectObject);
-                System.out.println("Project name updated successfully.");
+                logger.info("Project name updated successfully for " + projectId);
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     } 
 
     /**
+     * <p>
      * Delete the project by project Id
+     * </p>
      */
     public void deleteProject() {
         try {
@@ -158,20 +176,20 @@ public class ProjectController {
             System.out.print("Enter project Id : ");
             int projectId = scanner.nextInt();
             Project project = projectService.getProject(projectId);
-            if (project == null) {
-                System.out.println("No project Found.");
+            if (null == project) {
+                logger.warn("No project Found.");
             } else {
                 List<Employee> employees = new ArrayList<>(project.getEmployees());
                 if (employees.isEmpty()) {
                     if (projectService.isProjectDeleted(project)) {
-                        System.out.println("Project deleted successfully.");
+                        logger.info(project.getProjectName() + " project deleted successfully.");
                     }
                 } else {
-                    System.out.println("Enable to delete the project because it has employees.");
+                    logger.warn("Enable to delete the project " + projectId + " because it has employees.");
                 }
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

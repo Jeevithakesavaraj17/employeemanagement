@@ -28,10 +28,10 @@ import com.employeemanagement.service.SalaryAccountServiceImpl;
  * @since   2024/07/30
  */
 public class EmployeeServiceImpl implements EmployeeService {
-    DepartmentService departmentService = new DepartmentServiceImpl();
-    ProjectService projectService = new ProjectServiceImpl();
-    SalaryAccountService salaryAccountService = new SalaryAccountServiceImpl();
-    EmployeeDao employeeDao = new EmployeeDaoImpl();
+    private DepartmentService departmentService = new DepartmentServiceImpl();
+    private ProjectService projectService = new ProjectServiceImpl();
+    private SalaryAccountService salaryAccountService = new SalaryAccountServiceImpl();
+    private EmployeeDao employeeDao = new EmployeeDaoImpl();
   
     @Override
     public Employee addEmployee(String employeeName, 

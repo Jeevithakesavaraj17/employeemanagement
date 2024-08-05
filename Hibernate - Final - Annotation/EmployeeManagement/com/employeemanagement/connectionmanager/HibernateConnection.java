@@ -25,7 +25,9 @@ public class HibernateConnection {
     }
 
     /**
+     * <p>
      * This method is for getting session fatory object
+     * </p>
      */
     public static SessionFactory getFactory() {
         return factory;

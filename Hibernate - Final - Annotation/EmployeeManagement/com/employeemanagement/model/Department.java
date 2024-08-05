@@ -18,10 +18,11 @@ import com.employeemanagement.model.Employee;
  * <p>
  * Department is nothing but a domain where group of employees working.
  * This class represents department details
+ * </p>
+ *
  * departmentId   ID of the department
  * departmentName Name of the department
  * Set<Employee>  set of employees in the particular department
- * </p>
  *
  * @author Jeevithakesavaraj
  * @version 1.0

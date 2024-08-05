@@ -2,9 +2,9 @@ package com.employeemanagement.service;
 
 import java.util.List;
 
-import com.employeemanagement.exception.EmployeeException;
 import com.employeemanagement.dao.ProjectDao;
 import com.employeemanagement.dao.ProjectDaoImpl;
+import com.employeemanagement.exception.EmployeeException;
 import com.employeemanagement.model.Employee;
 import com.employeemanagement.model.Project;
 
@@ -18,7 +18,7 @@ import com.employeemanagement.model.Project;
  * @since    2024/07/30
  */
 public class ProjectServiceImpl implements ProjectService {
-    ProjectDao projectDao = new ProjectDaoImpl();
+    private ProjectDao projectDao = new ProjectDaoImpl();
     
     @Override
     public Project addProject(String projectName) throws EmployeeException {

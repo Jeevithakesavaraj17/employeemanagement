@@ -6,6 +6,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import com.employeemanagement.exception.EmployeeException;
 import com.employeemanagement.model.Department;
 import com.employeemanagement.model.Employee;
@@ -32,14 +35,17 @@ import com.employeemanagement.util.Validator;
  * @since  2024/07/30
  */
 public class EmployeeController {
-    static Scanner scanner = new Scanner(System.in);
-    EmployeeService employeeService = new EmployeeServiceImpl();
-    DepartmentService departmentService = new DepartmentServiceImpl();
-    ProjectService projectService = new ProjectServiceImpl();
-    SalaryAccountService salaryAccountService = new SalaryAccountServiceImpl();
+    Scanner scanner = new Scanner(System.in);
+    private static Logger logger = LogManager.getLogger();
+    private EmployeeService employeeService = new EmployeeServiceImpl();
+    private DepartmentService departmentService = new DepartmentServiceImpl();
+    private ProjectService projectService = new ProjectServiceImpl();
+    private SalaryAccountService salaryAccountService = new SalaryAccountServiceImpl(); 
     
     /**
+     * <p>
      * Display menu which has functions to get employee input and display employee details.
+     * </p>
      */
     public void displayMenu() {
         boolean isExit = false;
@@ -82,7 +88,9 @@ public class EmployeeController {
     }
 
     /**
+     * <p>
      * Get employee details and add employee data to the list.
+     * </p>
      */
     public void addEmployeeDetails() {
         System.out.println("Add Employee:");
@@ -90,12 +98,13 @@ public class EmployeeController {
         String employeeName = getEmployeeName();
         LocalDate birthDate = getDateOfBirth();
         long phoneNumber = getPhoneNumber();
+        scanner.nextLine();
         String mailId = getMailId();
         int experience = getExperience();
         try {
             List<Department> departments = departmentService.getDepartments();
             if (departments.isEmpty()) {
-                System.out.println("No Departments found.");
+                logger.warn("No Departments found. you have to add the department first.");
             } else{
                 String format = "| %-5s | %-15s \n";
                 System.out.format(format, "Id", "Name");
@@ -118,21 +127,23 @@ public class EmployeeController {
                                                           phoneNumber, mailId, experience, 
                                                          departmentId, accountNumber, ifscCode);
                 System.out.println(employee);
-                System.out.println("Employee added successfully.");
+                logger.info(employee.getEmployeeName() + " added successfully.");
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         } 
     }
 
     /**
+     * <p>
      * Display list of employees
+     * </p>
      */
     public void displayEmployees() {
         System.out.println("Employees");
         try {
             if (employeeService.isEmployeeListEmpty()) {
-                System.out.println("No Employee Records...");
+                logger.warn("No Employee Records...");
             } else {
                 List<Employee> employees = employeeService.getEmployees();
                 String format = "| %-4s | %15s | %-4s | %-15s | %-12s | %-12s | %-20s | %-10s | %-20s \n";
@@ -150,20 +161,23 @@ public class EmployeeController {
                                       employee.getExperience(),
                                       employee.getProjectDetails());
                 }
+                logger.info("All employees are displayed.");
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
     /**
+     * <p>
      * Get Id of the employee and update their details.
+     * </p>
      */
     public void updateEmployeeDetails() {
         int employeeId = getEmployeeId();
         try {
             if (!employeeService.isEmployeePresent(employeeId)) {
-                System.out.println("No Employee Found.");
+                logger.warn("No Employee Found.");
             } else {
                 Employee employee = employeeService.getEmployeeById(employeeId);
                 System.out.println(employee);
@@ -232,27 +246,29 @@ public class EmployeeController {
                 }
                 Employee updatedEmployee = employeeService.updateEmployeeDetails(employee);
                 System.out.println(updatedEmployee);
-                System.out.println("Updated successfully");
+                logger.info("Details updated successfully for " + employee.getEmployeeName());
             }   
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         } 
     }
     
     /**
+     * <p>
      * Get Id of the employee, project Id and
      * add project to the employee according to the employeeId.
+     * </p>
      */
     public void addProjectToEmployee() {
         int employeeId = getEmployeeId();
         try {
             if (!employeeService.isEmployeePresent(employeeId)) {
-                System.out.println("No Employee Found.");
+                logger.warn("No Employee Found.");
             } else {
                 Employee employee = employeeService.getEmployeeById(employeeId); 
                 List<Project> projects = projectService.getProjects();
                 if (projects.isEmpty()) {
-                    System.out.println("No projects found.");
+                    logger.warn("No projects found.");
                 } else {
                     String format = "| %-4s | %15s \n";
                     System.out.format(format, "Id", "Name");
@@ -263,28 +279,30 @@ public class EmployeeController {
                     System.out.print("Enter ProjectId : ");
                     int projectId = scanner.nextInt();
                     Project project = projectService.getProject(projectId);
-                    if (project == null) {
-                        System.out.println("No project found.");
+                    if (null == project) {
+                        logger.warn("No project found.");
                     } else {
                         employeeService.addProjectToEmployee(project, employee);
-                        System.out.println("Project added successfully.");
+                        logger.info(project.getProjectName() + "project added successfully for " + employee.getEmployeeName());
                     }
                 }
             }  
         } catch (EmployeeException e) {
-            System.out.println("Employee is already assigned to the project" + e.getMessage());
+            logger.error("Employee is already assigned to the project" + e.getMessage());
         }
     }
 
     /**
+     * <p>
      * Get employeeId and display all projects in that employeeId.
+     * </p>
      */
     public void displayProjectsOfEmployee() {
         System.out.println("Display Projects by Employee");
         int employeeId = getEmployeeId();
         try {
             if (!employeeService.isEmployeePresent(employeeId)) {
-                System.out.println("No employeeFound.");
+                logger.warn("No employeeFound.");
             } else {
                 Employee employee = employeeService.getEmployeeById(employeeId);
                 List<Project> projects = new ArrayList<>(employee.getProjects());
@@ -297,34 +315,37 @@ public class EmployeeController {
                         System.out.format(format, project.getProjectId(), 
                                             project.getProjectName());
                     }
+                    logger.info("List of projects of employee" + employee.getEmployeeName());
                 }
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }      
     }
 
     /**
+     * <p>
      * Get employee Id and delete that Employee.
+     * </p>
      */
     public void deleteEmployee() {
         int employeeId = getEmployeeId();
         try {
             if (employeeService.isEmployeePresent(employeeId)) {
                 if (employeeService.isEmployeeDeleted(employeeId)) {
-                    System.out.println("Employee " + employeeId + " Deleted.");
+                    logger.info("Employee " + employeeId + " Deleted.");
                 }
             } else {
-                System.out.println("No employee found.");
+                logger.warn("No employee found.");
             }
         } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
     
     /**  
      * Get employeeId and validate that id.
-     *@return employeeId    Id of the employee
+     * @return employeeId    Id of the employee
      */
     public int getEmployeeId() {
         int employeeId = 0;
@@ -344,7 +365,7 @@ public class EmployeeController {
 
     /**  
      * Get employee name and validate that name.
-     *@return employeeName    Name of the employee
+     * @return employeeName    Name of the employee
      */
     public String getEmployeeName() {
         System.out.print("Enter Name : ");
@@ -359,14 +380,14 @@ public class EmployeeController {
 
     /**
      * Get employee date of birth and validate.
-     *@return daeOfBirth     date of birth of the employee
+     * @return daeOfBirth     date of birth of the employee
      */
     public LocalDate getDateOfBirth() {
         LocalDate dateOfBirth = null;
         String date = null;
         try {
-            date = scanner.nextLine();
             System.out.print("Enter Date Of Birth (YYYY-MM-DD) : ");
+            date = scanner.nextLine();
             while (!Validator.isValidDate(date)) {
                 System.out.print("Invalid format. Please enter correct"
                                   + "format(YYYY-MM-DD) : ");

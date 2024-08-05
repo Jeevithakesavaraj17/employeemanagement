@@ -1,0 +1,43 @@
+2024-08-05 22:51:40 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+2024-08-05 22:51:40 INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-08-05 22:51:41 WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-08-05 22:51:41 INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/employee_management]
+2024-08-05 22:51:41 INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=root}
+2024-08-05 22:51:41 INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2024-08-05 22:51:41 INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-08-05 22:51:41 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-08-05 22:51:42 INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3dc40ab9] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-08-05 22:51:42 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-08-05 22:51:42 INFO  com.employeemanagement.controller.EmployeeController - All employees are displayed.
+2024-08-05 23:50:18 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+2024-08-05 23:50:18 INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-08-05 23:50:18 WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2024-08-05 23:50:18 INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/employee_management]
+2024-08-05 23:50:18 INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=root}
+2024-08-05 23:50:18 INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2024-08-05 23:50:18 INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2024-08-05 23:50:18 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-08-05 23:50:19 INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@cde8c6c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2024-08-05 23:50:19 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-08-05 23:50:20 INFO  com.employeemanagement.controller.DepartmentController - Machine learning department added successfully.
+2024-08-05 23:50:25 INFO  com.employeemanagement.controller.DepartmentController - Departments displayed
+2024-08-05 23:50:29 INFO  com.employeemanagement.controller.DepartmentController - Departments displayed
+2024-08-05 23:50:31 INFO  com.employeemanagement.controller.DepartmentController - Displayed list of employees in the department HR
+2024-08-05 23:50:56 INFO  com.employeemanagement.controller.DepartmentController - Department name updated successfully for 4
+2024-08-05 23:50:58 INFO  com.employeemanagement.controller.DepartmentController - Departments displayed
+2024-08-05 23:51:11 INFO  com.employeemanagement.controller.DepartmentController - Departments displayed
+2024-08-05 23:51:12 INFO  com.employeemanagement.controller.DepartmentController - ML department deleted successfully.
+2024-08-05 23:52:10 INFO  com.employeemanagement.controller.EmployeeController - Bhavani added successfully.
+2024-08-05 23:52:14 INFO  com.employeemanagement.controller.EmployeeController - All employees are displayed.
+2024-08-05 23:52:55 INFO  com.employeemanagement.controller.EmployeeController - Details updated successfully for Hari
+2024-08-05 23:53:05 INFO  com.employeemanagement.controller.EmployeeController - All employees are displayed.
+2024-08-05 23:53:14 INFO  com.employeemanagement.controller.EmployeeController - Web Designingproject added successfully for Bhavani
+2024-08-05 23:53:22 INFO  com.employeemanagement.controller.EmployeeController - List of projects of employeeBhavani
+2024-08-05 23:53:37 INFO  com.employeemanagement.controller.EmployeeController - Employee 7 Deleted.
+2024-08-05 23:54:01 INFO  com.employeemanagement.controller.ProjectController - Project added successfully : Data collection
+2024-08-05 23:54:04 INFO  com.employeemanagement.controller.ProjectController - Displayed list of departments.
+2024-08-05 23:54:07 INFO  com.employeemanagement.controller.ProjectController - Displayed list of departments.
+2024-08-05 23:54:08 INFO  com.employeemanagement.controller.ProjectController - Displayed List of employees in the project 1
+2024-08-05 23:54:18 INFO  com.employeemanagement.controller.ProjectController - Displayed list of departments.
+2024-08-05 23:54:20 INFO  com.employeemanagement.controller.ProjectController - Data collection project deleted successfully.
+2024-08-05 23:54:23 INFO  com.employeemanagement.controller.ProjectController - Displayed list of departments.

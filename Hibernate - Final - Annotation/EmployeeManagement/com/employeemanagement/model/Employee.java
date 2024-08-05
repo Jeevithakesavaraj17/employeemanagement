@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.Period; 
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
@@ -26,6 +26,8 @@ import com.employeemanagement.model.SalaryAccount;
  * <p>
  * Employee is a person who is working in the company
  * This class is used for employee details
+ * </p>
+ *
  * employeeId     Id of the employee
  * employeeName   Name of the employee
  * DateOfBirth    employee's date of birth
@@ -35,7 +37,6 @@ import com.employeemanagement.model.SalaryAccount;
  * mailId         employee's mail id
  * experience     experience of the employee in years
  * Set<Project>   List of projects that employee have assigned
- * </p>
  *
  * @author Jeevithakesavaraj
  * @version 1.0
@@ -157,10 +158,6 @@ public class Employee {
         return isDeleted;
     }
 
-    /**
-     * Get projects in th employee.
-     *@return Set<Project>   list of projects
-     */
     public Set<Project> getProjects() {
         return projects;
     }
@@ -182,8 +179,10 @@ public class Employee {
     }
 
     /**
+     * <p>
      * To calculate age from Date of Birth 
-     *@return age      age of particular employee
+     * </p>
+     * @return age      age of particular employee
      */
     public int getAge() {
         LocalDate dob = getDateOfBirth();
